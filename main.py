@@ -3,7 +3,7 @@
 # Name: Drew McGregor
 # Class: CS30
 # Assignment: RPG-Map
-# Version: 0.4.2
+# Version: 0.4.3
 #-----------------------------------------------------------------------------
 '''
          Player can move around a 2d map of a mineshaft.
@@ -48,7 +48,7 @@ rooms = {'shaft': {'description': 'the mineshaft. '
 map = [['shaft', 'damp_cave', 'flooded_cave', 'crystal_cave'],
        ['shaft', 'stone', 'gas_pockets', 'abandoned_shaft'], 
        ['shaft', 'weak_stone', 'stone', 'stone']]
-player = {'xpos': 0, 'ypos': 2, 'movement_options': []}
+player = {'xpos': 0, 'ypos': 2, 'movement_options': [], 'inventory':[]}
 #-Functions ------------------------------------------------------------------
 def get_YesNo(msg):
     '''Asks user yes no question, outputs true for yes, false for no.
@@ -101,6 +101,7 @@ def offer_options(original_options, msg, error_msg):
 
 
 def update_movement_options(xpos, ypos):
+    '''Modifies player['movement_options'] assuming player is at xpos, ypos'''
     global player
     player['movement_options'].clear()
     if xpos == 0:
@@ -119,6 +120,7 @@ def update_movement_options(xpos, ypos):
 
 
 def move():
+    '''Lets a user move the player around the map'''
     print('You enter '
           + f"{rooms[map[player['ypos']][player['xpos']]]['description']}")
     update_movement_options(player['xpos'], player['ypos'])
