@@ -3,13 +3,14 @@
 # Name: Drew McGregor
 # Class: CS30
 # Assignment: RPG-Map
-# Version: 0.4.3
+# Version: 1.0
 #-----------------------------------------------------------------------------
 '''
          Player can move around a 2d map of a mineshaft.
 '''
 #-----------------------------------------------------------------------------
 #-Imports and Global Variables------------------------------------------------
+from tabulate import tabulate
 rooms = {'shaft': {'description': 'the mineshaft. '
                     + 'The shaft is the only place you can move vertically',
             'dangers': [], 'tools': [], 'cleared': True},
@@ -45,9 +46,9 @@ rooms = {'shaft': {'description': 'the mineshaft. '
                             + 'through it. ',
             'dangers': ['drowning'], 'tools': ['scuba gear'],
             'cleared': False}}
-map = [['shaft', 'damp_cave', 'flooded_cave', 'crystal_cave'],
+mine_map = [['shaft', 'weak_stone', 'stone', 'stone'],
        ['shaft', 'stone', 'gas_pockets', 'abandoned_shaft'], 
-       ['shaft', 'weak_stone', 'stone', 'stone']]
+       ['shaft', 'damp_cave', 'flooded_cave', 'crystal_cave']]
 player = {'xpos': 0, 'ypos': 2, 'movement_options': [], 'inventory':[]}
 #-Functions ------------------------------------------------------------------
 def get_YesNo(msg, error_msg):
@@ -84,6 +85,7 @@ def get_choice(valid_inputs, msg, error_msg):
 
 def offer_options(original_options, msg, error_msg):
     """Assign and print numerical values to items in a list"""
+    print('\n\n')
     for item in original_options:
         print(f"{original_options.index(item)+1}. {item}")
     numbers = [str(number+1) for number in range(len(original_options))]
@@ -122,8 +124,6 @@ def update_movement_options(xpos, ypos):
 
 def move():
     '''Lets a user move the player around the map'''
-    print('You enter '
-          + f"{rooms[map[player['ypos']][player['xpos']]]['description']}")
     update_movement_options(player['xpos'], player['ypos'])
     choice = offer_options(player['movement_options'], 
                   'Where would you like to move? ', 
@@ -137,6 +137,11 @@ def move():
     elif choice == 'left':
         player['xpos'] -= 1
 
+
+def view_map():
+    with open('mining_map') as m:
+        print(m.read())
+
 def main_options():
     choice = offer_options(['move', 'mine', 'view_map'], 'What would you like to do? ', "That's not a valid option, try again").lower()
     if choice == 'move':
@@ -148,12 +153,18 @@ def main_options():
 
 def main_menu():
     '''Essentially a main() function'''
+    with open('mining_map', 'w') as m:
+        m.write(tabulate(mine_map, tablefmt = 'outline'))
     print('MAIN MENU\n')
+    view_map()
     stop  = input('press enter to start or "q" to quit.').lower()
     while stop != '' or stop != 'q':
         if stop == '':
             print('game starting')
             while True:
+                print('You enter '
+                    + f"""{rooms[mine_map[player['ypos']]
+                        [player['xpos']]]['description']}""")
                 print(player)
                 main_options()
         elif stop == 'q':
