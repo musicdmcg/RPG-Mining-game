@@ -50,7 +50,7 @@ map = [['shaft', 'damp_cave', 'flooded_cave', 'crystal_cave'],
        ['shaft', 'weak_stone', 'stone', 'stone']]
 player = {'xpos': 0, 'ypos': 2, 'movement_options': [], 'inventory':[]}
 #-Functions ------------------------------------------------------------------
-def get_YesNo(msg):
+def get_YesNo(msg, error_msg):
     '''Asks user yes no question, outputs true for yes, false for no.
     msg = yes/no question'''
     answer = input(msg).lower()
@@ -59,7 +59,8 @@ def get_YesNo(msg):
     elif answer == 'no' or answer == 'n':
         return False
     else:
-        get_YesNo(msg)
+        print(error_msg)
+        get_YesNo(msg, error_msg)
 
 
 def get_choice(valid_inputs, msg, error_msg):
@@ -71,7 +72,7 @@ def get_choice(valid_inputs, msg, error_msg):
     '''
     choice = input(msg).lower()
     if choice == 'q':
-        if get_YesNo('Are you sure you want to quit?'):
+        if get_YesNo('Are you sure you want to quit?', 'The only valid otions are yes or no'):
             main_menu()
         else:
             choice = get_choice(valid_inputs, msg, error_msg)
@@ -90,7 +91,7 @@ def offer_options(original_options, msg, error_msg):
     full_options.extend(numbers)
     choice = get_choice(full_options, msg, error_msg)
     if choice == 'q':
-        if get_YesNo('Are you sure you want to quit?'):
+        if get_YesNo('Are you sure you want to quit?', 'The only valid options are yes or no'):
             main_menu()
     elif choice not in full_options:
         print(error_msg)
@@ -136,6 +137,14 @@ def move():
     elif choice == 'left':
         player['xpos'] -= 1
 
+def main_options():
+    choice = offer_options(['move', 'mine', 'view_map'], 'What would you like to do? ', "That's not a valid option, try again").lower()
+    if choice == 'move':
+        move()
+    elif choice == 'mine':
+        mine() #doesn't exist yet
+    elif choice == 'view_map':
+        view_map() #doesn't exist yet
 
 def main_menu():
     '''Essentially a main() function'''
@@ -146,7 +155,7 @@ def main_menu():
             print('game starting')
             while True:
                 print(player)
-                move()
+                main_options()
         elif stop == 'q':
             print('shutting down')
             break
