@@ -2,11 +2,11 @@
 # Title: Mining RPG
 # Name: Drew McGregor
 # Class: CS30
-# Assignment: RPG-Map
-# Version: 1.0
+# Assignment: External Files: RPG - Try/Except
+# Version: 1.1
 #-----------------------------------------------------------------------------
 '''
-         Player can move around a 2d map of a mineshaft.
+         Player can move around a 2d map of a mineshaft and view map of it.
 '''
 #-----------------------------------------------------------------------------
 #-Imports and Global Variables------------------------------------------------
@@ -85,7 +85,7 @@ def get_choice(valid_inputs, msg, error_msg):
 
 def offer_options(original_options, msg, error_msg):
     """Assign and print numerical values to items in a list"""
-    print('\n\n')
+    print('\n')
     for item in original_options:
         print(f"{original_options.index(item)+1}. {item}")
     numbers = [str(number+1) for number in range(len(original_options))]
@@ -122,6 +122,33 @@ def update_movement_options(xpos, ypos):
         pass
 
 
+def load_map(final_msg):
+    '''exports map as external file. final_msg = message print
+    after function runs'''
+    try:
+        with open('mining_map.txt', 'w') as m:
+            m.write(tabulate(mine_map, tablefmt = 'outline'))
+    except:
+        print('The map failed to write. Please reload the game')
+    else:
+        print('map loaded')
+    finally:
+        print(final_msg)
+
+
+def view_map():
+    '''attempts to print map'''
+    try:
+        with open('mining_map.txt') as m:
+            print(m.read())
+    except:
+        print('map failed to load')
+    else:
+        print('you open your map')
+    finally:
+        print('good luck')
+
+
 def move():
     '''Lets a user move the player around the map'''
     update_movement_options(player['xpos'], player['ypos'])
@@ -136,35 +163,30 @@ def move():
         player['xpos'] += 1
     elif choice == 'left':
         player['xpos'] -= 1
+    print(f"""You enter {rooms[mine_map[player['ypos']]
+                        [player['xpos']]]['description']}""")
 
-
-def view_map():
-    with open('mining_map') as m:
-        print(m.read())
 
 def main_options():
     choice = offer_options(['move', 'mine', 'view_map'], 'What would you like to do? ', "That's not a valid option, try again").lower()
     if choice == 'move':
         move()
     elif choice == 'mine':
-        mine() #doesn't exist yet
+        pass
+        # mine() #doesn't exist yet
     elif choice == 'view_map':
-        view_map() #doesn't exist yet
+        view_map()
+
 
 def main_menu():
     '''Essentially a main() function'''
-    with open('mining_map', 'w') as m:
-        m.write(tabulate(mine_map, tablefmt = 'outline'))
     print('MAIN MENU\n')
-    view_map()
+    load_map('starting...')
     stop  = input('press enter to start or "q" to quit.').lower()
     while stop != '' or stop != 'q':
         if stop == '':
             print('game starting')
             while True:
-                print('You enter '
-                    + f"""{rooms[mine_map[player['ypos']]
-                        [player['xpos']]]['description']}""")
                 print(player)
                 main_options()
         elif stop == 'q':
