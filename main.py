@@ -3,7 +3,7 @@
 # Name: Drew McGregor
 # Class: CS30
 # Assignment: External Files: RPG - Try/Except
-# Version: 1.1
+# Version: 1.2
 #-----------------------------------------------------------------------------
 '''
          Player can move around a 2d map of a mineshaft and view map of it.
@@ -17,26 +17,24 @@ rooms = {'shaft': {'description': 'the mineshaft. '
         'weak_stone': {'description': 'an area of weak stone. '
                         + 'You can mine through it with just a '
                         + 'basic pickaxe. ',
-            'dangers': ['cave-in'], 'tools': [], 'cleared': False}, 
+            'dangers': ['cave-in'], 'tools': []}, 
         'stone': {'description': 'an area of hardened stone. '
                     + 'You can only mine through it with an '
                   + 'upgraded pickaxe',
-            'dangers': [], 'tools': ['upgraded pickaxe'], 'cleared': False}, 
+            'dangers': [], 'tools': ['upgraded pickaxe']}, 
         'gas_pockets': {'description': 'an area of weak stone. ' 
                         + 'You can hear a hissing from somewhere '
                         + 'close. You can mine through the stone '
                         + 'with just a basic pickaxe. ',
-            'dangers': ['cave-in', 'suffocation'], 'tools': [],
-            'cleared': False},
+            'dangers': ['cave-in', 'suffocation'], 'tools': []},
         'abandoned_shaft': {'description': 'an old abandoned '
                             + 'mineshaft. It appears deserted. ',
-            'dangers': ['unstable_floor', 'cave-in'], 'tools': [],
-            'cleared': False}, 
+            'dangers': ['unstable_floor', 'cave-in'], 'tools': []}, 
         'damp_cave': {'description': 'dimly lit cave. '
                         + 'There are puddles in low spots, '
                         + 'stalagtites and stalagmites extend from '
                         + 'the ceiling and floor. ',
-            'dangers': ['slipping'], 'tools': [], 'cleared': False},
+            'dangers': ['slipping'], 'tools': []},
         'crystal_cave': {'description': 'a large cave with waist '
                             + ' high water. Crystals grow from the '
                             + 'ceilings and floors. ',
@@ -49,7 +47,7 @@ rooms = {'shaft': {'description': 'the mineshaft. '
 mine_map = [['shaft', 'weak_stone', 'stone', 'stone'],
        ['shaft', 'stone', 'gas_pockets', 'abandoned_shaft'], 
        ['shaft', 'damp_cave', 'flooded_cave', 'crystal_cave']]
-player = {'xpos': 0, 'ypos': 2, 'movement_options': [], 'inventory':[]}
+player = {'xpos': 0, 'ypos': 0, 'movement_options': [], 'inventory':[]}
 #-Functions ------------------------------------------------------------------
 def get_YesNo(msg, error_msg):
     '''Asks user yes no question, outputs true for yes, false for no.
@@ -114,9 +112,9 @@ def update_movement_options(xpos, ypos):
     elif xpos == 3:
         player['movement_options'].append('left')
     try:
-        if ypos == 2:
+        if ypos == 0:
             player['movement_options'].remove('up')
-        elif ypos == 0:
+        elif ypos == 2:
                  player['movement_options'].remove('down')
     except:
         pass
@@ -156,9 +154,9 @@ def move():
                   'Where would you like to move? ', 
                   'invalid input, please try again')
     if choice == 'up':
-        player['ypos'] += 1
-    elif choice == 'down':
         player['ypos'] -= 1
+    elif choice == 'down':
+        player['ypos'] += 1
     elif choice == 'right':
         player['xpos'] += 1
     elif choice == 'left':
