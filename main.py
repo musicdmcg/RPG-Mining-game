@@ -3,7 +3,7 @@
 # Name: Drew McGregor
 # Class: CS30
 # Assignment: Modules: RPG - Inventory
-# Version: 2.2
+# Version: 2.3
 #-----------------------------------------------------------------------------
 '''
          Player can move around a 2d map of a mineshaft and view map of it.
@@ -31,7 +31,7 @@ def main_options():
 def main_menu():
     '''Essentially a main() function'''
     print('MAIN MENU\n')
-    m.load_map('starting')
+    m.load_map()
     stop  = input('press enter to start or "q" to quit.').lower()
     while stop != '' or stop != 'q':
         if stop == '':

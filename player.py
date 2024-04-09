@@ -34,8 +34,10 @@ def mine():
         if m.rooms[m.mine_map[player['ypos']][player['xpos']]]['tools'] in player['inventory']:
             player['inventory'].extend(m.rooms[m.mine_map[player['ypos']][player['xpos']]]['treasure'])
             m.mine_map[player['ypos']][player['xpos']] += ' (cleared)'
+            m.load_map()
         else:
-            print("can't mine through")
+            print(f'''You need {m.rooms[m.mine_map[player['ypos']]
+            [player['xpos']]]['tools']} to clear this room. ''')
 
 
 def move():
