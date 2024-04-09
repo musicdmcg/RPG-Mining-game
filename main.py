@@ -3,7 +3,7 @@
 # Name: Drew McGregor
 # Class: CS30
 # Assignment: Modules: RPG - Inventory
-# Version: 2.1
+# Version: 2.2
 #-----------------------------------------------------------------------------
 '''
          Player can move around a 2d map of a mineshaft and view map of it.

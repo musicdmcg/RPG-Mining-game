@@ -5,7 +5,7 @@
 # Imports and Global Variables------------------------------------------------
 import user_inputs as u
 import map as m
-player = {'xpos': 0, 'ypos': 0, 'movement_options': [], 'inventory':[]}
+player = {'xpos': 0, 'ypos': 0, 'movement_options': [], 'inventory':['basic pick']}
 #-Functions-------------------------------------------------------------------
 def update_movement_options(xpos, ypos):
     '''Modifies player['movement_options'] assuming player is at xpos, ypos'''

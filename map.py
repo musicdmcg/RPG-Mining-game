@@ -6,36 +6,36 @@
 from tabulate import tabulate
 rooms = {'shaft': {'description': 'the mineshaft. '
     + 'The shaft is the only place you can move vertically',
-'dangers': [], 'tools': []},
+'dangers': [], 'tools': 'basic pick'},
 'weak_stone': {'description': 'an area of weak stone. '
         + 'You can mine through it with just a '
         + 'basic pickaxe. ',
-'dangers': ['cave-in'], 'tools': []}, 
+'dangers': ['cave-in'], 'tools': 'basic pick'}, 
 'stone': {'description': 'an area of hardened stone. '
     + 'You can only mine through it with an '
   + 'upgraded pickaxe',
-'dangers': [], 'tools': ['upgraded pickaxe']}, 
+'dangers': [], 'tools': 'upgraded pick'}, 
 'gas_pockets': {'description': 'an area of weak stone. ' 
         + 'You can hear a hissing from somewhere '
         + 'close. You can mine through the stone '
         + 'with just a basic pickaxe. ',
-'dangers': ['cave-in', 'suffocation'], 'tools': []},
+'dangers': ['cave-in', 'suffocation'], 'tools': 'basic pick'},
 'abandoned_shaft': {'description': 'an old abandoned '
             + 'mineshaft. It appears deserted. ',
-'dangers': ['unstable_floor', 'cave-in'], 'tools': []}, 
+'dangers': ['unstable_floor', 'cave-in'], 'tools': 'basic pick'}, 
 'damp_cave': {'description': 'dimly lit cave. '
         + 'There are puddles in low spots, '
         + 'stalagtites and stalagmites extend from '
         + 'the ceiling and floor. ',
-'dangers': ['slipping'], 'tools': []},
+'dangers': ['slipping'], 'tools': 'basic pick'},
 'crystal_cave': {'description': 'a large cave with waist '
             + ' high water. Crystals grow from the '
             + 'ceilings and floors. ',
-'dangers': [], 'tools': []}, 
+'dangers': [], 'tools': 'basic pick'}, 
 'flooded_cave': {'description': 'a flooded cave. '
             + 'You will need scuba gear to pass '
             + 'through it. ',
-'dangers': ['drowning'], 'tools': ['scuba gear']}}
+'dangers': ['drowning'], 'tools': 'scuba gear'}}
 mine_map = [['shaft', 'weak_stone', 'stone', 'stone'],
 ['shaft', 'stone', 'gas_pockets', 'abandoned_shaft'], 
 ['shaft', 'damp_cave', 'flooded_cave', 'crystal_cave']]
