@@ -46,10 +46,7 @@ def offer_options(original_options, msg, error_msg):
     full_options = original_options.copy()
     full_options.extend(numbers)
     choice = get_choice(full_options, msg, error_msg)
-    if choice == 'q':
-        if get_YesNo('Are you sure you want to quit?', 'The only valid options are yes or no'):
-            main_menu()
-    elif choice not in full_options:
+    if choice not in full_options:
         print(error_msg)
         choice = get_choice(full_options, msg, error_msg)
     elif choice.isnumeric():

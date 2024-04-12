@@ -1,5 +1,5 @@
-+------------+-----------------+
-| weak_stone | stone           |
-| stone      | abandoned_shaft |
-| damp_cave  | crystal_cave    |
-+------------+-----------------+
++------------------+-----------------------+-------------------------+----------------------------+
+| {'shaft': True}  | {'weak_stone': False} | {'stone': False}        | {'stone': False}           |
+| {'shaft': False} | {'stone': False}      | {'gas_pockets': False}  | {'abandoned_shaft': False} |
+| {'shaft': False} | {'damp_cave': False}  | {'flooded_cave': False} | {'crystal_cave': False}    |
++------------------+-----------------------+-------------------------+----------------------------+
