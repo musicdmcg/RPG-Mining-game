@@ -25,6 +25,10 @@ def update_movement_options(xpos, ypos):
             player['movement_options'].remove('up')
         elif ypos == 2:
                  player['movement_options'].remove('down')
+    except:
+        pass
+    try: 
+         # Removing options that need correct tools. 
         if m.rooms[current_room]['tools'] not in player['inventory']:
             player['movement_options'].remove('right')
             print('You need the correct tools to progress further')
@@ -32,7 +36,8 @@ def update_movement_options(xpos, ypos):
         pass
 
 def mine():
-    '''put description here'''
+    '''Checks whether room is cleared, if not adds rooms treasure
+     to player treasure. '''
     if m.mine_map[player['ypos']][player['xpos']][current_room]:
         print("There's nothing left to mine in this room")
     else:

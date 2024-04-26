@@ -36,16 +36,23 @@ rooms = {'shaft': {'description': 'the mineshaft. '
             + 'You will need scuba gear to pass '
             + 'through it. ',
 'dangers': ['drowning'], 'tools': 'scuba gear', 'treasure': 2}}
-mine_map = [[{'shaft':False}, {'weak_stone':False}, {'stone':False}, {'stone':False}],
-[{'shaft':False}, {'stone':False}, {'gas_pockets':False}, {'abandoned_shaft':False}], 
-[{'shaft':False}, {'damp_cave':False}, {'flooded_cave':False}, {'crystal_cave':False}]]
+mine_map = [[{'shaft':False}, {'weak_stone':False}, {'stone':False},
+             {'stone':False}],
+        [{'shaft':False}, {'stone':False}, {'gas_pockets':False},
+         {'abandoned_shaft':False}], 
+        [{'shaft':False}, {'damp_cave':False}, {'flooded_cave':False},
+         {'crystal_cave':False}]]
+player_map = [['shaft', 'weak_stone', 'stone', 'stone'],
+['shaft', 'stone', 'gas_pockets', 'abandoned_shaft'], 
+['shaft', 'damp_cave', 'flooded_cave', 'crystal_cave']]
+
 #-Functions-------------------------------------------------------------------
 def load_map():
     '''exports map as external file. final_msg = message print
     after function runs'''
     try:
         with open('mining_map.txt', 'w') as m:
-            m.write(tabulate(mine_map, tablefmt = 'outline'))
+            m.write(tabulate(player_map, tablefmt = 'outline'))
     except:
         print('The map failed to write. Please reload the game')
     else:
@@ -63,5 +70,6 @@ def view_map():
         print('you open your map')
     finally:
         print('good luck')
+
 
 print(mine_map[0][0])
